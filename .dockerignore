@@ -1,0 +1,12 @@
+node_modules
+dist
+coverage
+data
+.git
+.github
+.idea
+.vscode
+*.log
+.env*
+# Local config with credentials - mounted at runtime (CONFIG_FILE_PATH), never baked in.
+config/config.yml
