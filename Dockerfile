@@ -11,9 +11,11 @@ WORKDIR /usr/src/app
 
 # .npmrc maps the @fsarch scope to GitHub Packages - every mounted service
 # package (and @fsarch/server) is resolved from there, which needs a token
-# with read:packages. It's passed in as a BuildKit secret
-# (`--secret id=node_auth_token,env=NODE_AUTH_TOKEN`) and exposed only to the
-# install RUN steps below as NODE_AUTH_TOKEN, so it never ends up in a layer.
+# with read:packages. pnpm only accepts registry credentials from the
+# user-level config, so the token comes in as a BuildKit secret *file*
+# (`--secret id=npmrc,src=<file containing
+# //npm.pkg.github.com/:_authToken=...>`) mounted at /root/.npmrc for the
+# install RUN steps below only - it never ends up in a layer.
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 
 # Puppeteer (pulled in by @fsarch/image-editor-server) would otherwise
@@ -31,7 +33,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends node-gyp build-essential python3 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-RUN --mount=type=secret,id=node_auth_token,env=NODE_AUTH_TOKEN \
+RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \
     pnpm install --frozen-lockfile --prod
 
 
@@ -42,7 +44,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends node-gyp build-essential python3 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-RUN --mount=type=secret,id=node_auth_token,env=NODE_AUTH_TOKEN \
+RUN --mount=type=secret,id=npmrc,target=/root/.npmrc \
     pnpm install --frozen-lockfile
 
 COPY . ./

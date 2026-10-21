@@ -8,9 +8,10 @@ on:
 
 # packages: read - the Docker build installs the @fsarch/* service packages
 # (and @fsarch/server) from GitHub Packages; the job's own GITHUB_TOKEN is
-# passed into the build as a BuildKit secret for that. Each of those
-# packages has to grant this repo read access ("Manage Actions access" in
-# the package settings), otherwise the install gets a 403.
+# passed into the build as a BuildKit secret (an .npmrc file) for that.
+# GitHub Packages needs a token even for public packages. All @fsarch
+# packages are public; a private one would additionally have to grant this
+# repo read access ("Manage Actions access" in its package settings).
 permissions:
   contents: read
   packages: read
@@ -58,9 +59,14 @@ jobs:
             TAG_ARGS="${TAG_ARGS} --tag ${tag}"
           done
 
+          # pnpm only reads registry credentials from a user-level .npmrc,
+          # so hand the token to the build as such a file (see Dockerfile).
+          NPMRC="${RUNNER_TEMP}/npmrc"
+          printf '//npm.pkg.github.com/:_authToken=%s\n' "${NODE_AUTH_TOKEN}" > "${NPMRC}"
+
           docker buildx build \
             ${TAG_ARGS} \
-            --secret id=node_auth_token,env=NODE_AUTH_TOKEN \
+            --secret id=npmrc,src="${NPMRC}" \
             --platform linux/amd64,linux/arm64 \
             --push .
       - name: notify helm-charts of the new release
