@@ -1,0 +1,215 @@
+# Mono-service harness config - see src/config.ts / src/service-registry.ts.
+#
+# Each entry in `services` mounts one service `type` under its own `id`
+# (used as the route prefix, e.g. /calendar/..., and as the TypeORM
+# connection name). The same `type` can appear more than once under
+# different `id`s to run several instances of the same service under
+# different paths - see the commented-out second `function-server` mount
+# below.
+#
+# `config` is 1:1 the same shape that service type's own standalone
+# config.yaml/config.yml would have (database/auth/uac/... sections) - see
+# that service repo's own config.template.yml for the full set of options
+# per section (oidc auth, postgres database, token-based uac, ...). This
+# file only shows the simplest working combination (sqlite + static
+# auth/uac) for a quick local smoke test.
+services:
+  - id: calendar
+    type: calendar-server
+    config:
+      database:
+        type: sqlite
+        database: ./data/calendar.sqlite
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+      uac:
+        type: static
+        users:
+          - user_id: admin
+            permissions: ["*"]
+
+  - id: metric
+    type: metric-server
+    config:
+      database:
+        type: sqlite
+        database: ./data/metric.sqlite
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+      uac:
+        type: static
+        users:
+          # metric-server's Role enum has no wildcard - list its roles explicitly.
+          - user_id: admin
+            permissions: ["manage_metrics", "read_metrics", "write_measurements"]
+
+  - id: function-gateway
+    type: function-gateway
+    config:
+      database:
+        type: sqlite
+        database: ./data/function-gateway.sqlite
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+
+  - id: function-server
+    type: function-server
+    config:
+      database:
+        type: sqlite
+        database: ./data/function-server.sqlite
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+      # Required by MetaModule's ModuleConfiguration.register('WORKER_CONFIG', ...)
+      # - map of worker API clients this function-server can call out to.
+      worker:
+        api: {}
+
+  # Second instance of the same `type`, mounted under a different `id`/path
+  # with its own isolated database/auth config - demonstrates that `type`
+  # picks "which package", `id` picks "which mount" (route prefix +
+  # connection name).
+  # - id: function-server-2
+  #   type: function-server
+  #   config:
+  #     database:
+  #       type: sqlite
+  #       database: ./data/function-server-2.sqlite
+  #     auth:
+  #       type: static
+  #       secret: dev-secret-change-me
+  #       users:
+  #         - id: admin
+  #           username: admin
+  #           password: admin
+  #     worker:
+  #       api: {}
+
+  - id: function-worker
+    type: function-node-worker
+    config:
+      # This service has no entities of its own, but `@fsarch/server` still
+      # wires up a named connection per mount - see the descriptor's own
+      # comment in function-node-worker/src/lib/index.ts.
+      database:
+        type: sqlite
+        database: ./data/function-worker.sqlite
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+      # Required by FunctionServerModule's / FunctionExecuterModule's
+      # ModuleConfiguration.register('FUNCTION_SERVER_CONFIG'/'WORKER_AUTH_CONFIG', ...).
+      function_server:
+        type: remote
+        url: http://localhost:8080
+        auth:
+          type: openid-client-credentials
+          token_endpoint: http://localhost:8080/token
+          client_id: dev-client
+          client_secret: dev-secret
+      worker_auth:
+        type: openid-client-credentials
+        token_endpoint: http://localhost:8080/token
+        client_id: dev-client
+        client_secret: dev-secret
+
+  - id: image-editor
+    type: image-editor-server
+    config:
+      database:
+        type: sqlite
+        database: ./data/image-editor.sqlite
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+      uac:
+        type: static
+        users:
+          - user_id: admin
+            permissions: ["*"]
+
+  - id: image
+    type: image-server
+    config:
+      database:
+        type: sqlite
+        database: ./data/image.sqlite
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+      uac:
+        type: static
+        users:
+          # image-server's Role enum has no wildcard - list its roles explicitly.
+          - user_id: admin
+            permissions: ["manage_images"]
+      # Required by ImagePresetSeeder's onModuleInit (iterates images.presets
+      # unconditionally) - an empty list is fine, no presets get created.
+      images:
+        presets: []
+      naming:
+        type: named
+        path: ./data/image-storage/named
+      storage:
+        data:
+          type: filesystem
+          config:
+            path: ./data/image-storage/data
+        cache:
+          type: filesystem
+          config:
+            path: ./data/image-storage/cache
+      # `signed_urls` is entirely optional (omitted here) - its schema
+      # requires `keys` whenever the section is present at all, even with
+      # `enabled: false`, so a stub `{enabled: false}` fails validation.
+
+  - id: frontier-api
+    type: frontier-api
+    config:
+      database:
+        type: sqlite
+        database: ./data/frontier-api.sqlite
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+      # Required by FrontierApiModule's ModuleConfiguration.register('WORKERS_CONFIG', ...).
+      workers:
+        websocket:
+          auth_token: dev-worker-auth-token
+          config_check_interval_ms: 5000

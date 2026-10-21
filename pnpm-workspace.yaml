@@ -1,0 +1,11 @@
+allowBuilds:
+  '@scarf/scarf': false
+  '@swc/core': true
+  better-sqlite3: true
+  protobufjs: true
+  puppeteer: true
+minimumReleaseAgeExclude:
+  # The whole @fsarch scope resolves from GitHub Packages (see .npmrc), which
+  # doesn't expose publish dates - pnpm's minimumReleaseAge check would fail
+  # closed on every @fsarch package otherwise.
+  - '@fsarch/*'

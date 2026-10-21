@@ -1,0 +1,45 @@
+{
+  "name": "aio-server",
+  "version": "0.1.0",
+  "description": "All-in-one mono-service harness mounting multiple fsarch services in a single process via @fsarch/server's FsArchAppBuilder.addService()",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "build": "fsarch-server build",
+    "format": "biome format --write src",
+    "start": "CONFIG_FILE_PATH=./config/config.yml fsarch-server start",
+    "start:prod": "CONFIG_FILE_PATH=./config/config.yml node dist/main.js",
+    "lint": "biome check --write src",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@fsarch/calendar-server": "^0.1.0",
+    "@fsarch/frontier-api": "^0.1.2",
+    "@fsarch/function-gateway": "^0.1.1",
+    "@fsarch/function-node-worker": "^0.1.1",
+    "@fsarch/function-server": "^0.1.2",
+    "@fsarch/image-editor-server": "^0.1.0",
+    "@fsarch/image-server": "^0.2.2",
+    "@fsarch/metric-server": "^0.1.1",
+    "@fsarch/server": "^0.5.2",
+    "@nestjs/common": "^12.1.0",
+    "@nestjs/core": "^12.1.0",
+    "@nestjs/platform-express": "^12.1.0",
+    "js-yaml": "^5.4.2",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.14",
+    "@nestjs/testing": "^12.1.0",
+    "@types/node": "^26.6.2",
+    "@vitest/coverage-v8": "^5.0.1",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.1"
+  }
+}
