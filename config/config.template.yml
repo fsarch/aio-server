@@ -213,3 +213,33 @@ services:
         websocket:
           auth_token: dev-worker-auth-token
           config_check_interval_ms: 5000
+
+  - id: material-tracing
+    type: material-tracing-server
+    config:
+      # Postgres only: the entities use `timestamp` columns and ILIKE queries.
+      database:
+        type: postgres
+        host: localhost
+        port: 5432
+        database: material_tracing
+        username: dev
+        password: dev
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+      # Required by MetaController (`.meta/user-interface`).
+      images:
+        type: remote
+        admin_url: http://localhost:3001
+        user_url: http://localhost:3001
+      # Required (may be empty) - see the app repo's config for the shape.
+      custom_actions: []
+      # `product_server` is optional and omitted here.
+      #
+      # Custom resources: /v1/material-tracing/.meta/custom-resources
+      # MCP tools:        /material-tracing/.ai/mcp

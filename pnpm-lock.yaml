@@ -29,12 +29,15 @@ importers:
       '@fsarch/image-server':
         specifier: ^0.2.2
         version: 0.2.2(@nestjs/microservices@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-validator@0.15.1)(rxjs@7.8.2)(typescript@5.9.3)
+      '@fsarch/material-tracing-server':
+        specifier: ^0.0.10
+        version: 0.0.10(@nestjs/microservices@12.2.0)(@nestjs/platform-express@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(pg@8.23.1)(rxjs@7.8.2)(typescript@5.9.3)
       '@fsarch/metric-server':
         specifier: ^0.1.1
         version: 0.1.1(@nestjs/microservices@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(keyv@5.6.0)(typescript@5.9.3)
       '@fsarch/server':
-        specifier: ^0.5.3
-        version: 0.5.3(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
+        specifier: ^0.5.4
+        version: 0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
       '@nestjs/common':
         specifier: ^12.1.0
         version: 12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -277,11 +280,15 @@ packages:
   '@fsarch/image-server@0.2.2':
     resolution: {integrity: sha512-TlSuHTwFho27yfzuOdRfL0HBWqmHD5sxjAcR2HJDHtJ0umN4xznsRCY7r2VxPuBheq13jL4s1WEnFp3NPbc5kw==, tarball: https://npm.pkg.github.com/download/@fsarch/image-server/0.2.2/795e640eb86223a1f380d6fef58496dfceaef1a1}
 
+  '@fsarch/material-tracing-server@0.0.10':
+    resolution: {integrity: sha512-AQsd/2ZyX3G+sA6QnoLsW2/M6kMSANTmk8LZccpXnWsw/ZD4rgLSwPTPesW7Knc9x+1JskOUO4pXlI9HF2nY7A==, tarball: https://npm.pkg.github.com/download/@fsarch/material-tracing-server/0.0.10/461c6961100771330b9b1791a3792806b8fe1028}
+    engines: {node: '>=24.0.0'}
+
   '@fsarch/metric-server@0.1.1':
     resolution: {integrity: sha512-KGxDmXw3BtNRkG1Q0mpY4O3s7tKp+O1dCipa3I151IaBJzpnaNRDidgjJ/Hv/DspBZbD3gAQwz3+KrGz+dPy2g==, tarball: https://npm.pkg.github.com/download/@fsarch/metric-server/0.1.1/6017b034bfdbf21d5d1105512f4a704e4b2326f3}
 
-  '@fsarch/server@0.5.3':
-    resolution: {integrity: sha512-0CejDnFQuh0rpjZFkBAUyrAckzUpfKofq8XRaPND+i+3/tjvQukMX8l4FhXu47ftg2+MRDgPXaan5TPoxLsPhQ==, tarball: https://npm.pkg.github.com/download/@fsarch/server/0.5.3/782657f8866f2cdb0157595c55cca790fc4dede2}
+  '@fsarch/server@0.5.4':
+    resolution: {integrity: sha512-Uv/kJJeDadKr/0r58xPhLSD76VO+rQ7rJsMNK+NvO+K/x+OtCQ8vg5iQ1/CU0k+mnfmapooor/GLTRJidC8EXw==, tarball: https://npm.pkg.github.com/download/@fsarch/server/0.5.4/24a6d91bddb427c30fe9c31941ce0b3c6598c03f}
     engines: {node: '>=24.0.0'}
     hasBin: true
 
@@ -3070,7 +3077,7 @@ snapshots:
 
   '@fsarch/calendar-server@0.0.1(@nestjs/core@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(rxjs@7.8.2)(typescript@5.9.3)':
     dependencies:
-      '@fsarch/server': 0.5.3(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
+      '@fsarch/server': 0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
       '@nestjs/common': 12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/swagger': 12.0.2(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.2.0)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(typescript@5.9.3)
       '@nestjs/typeorm': 12.0.2(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.2.0)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typeorm@1.1.2(pg@8.23.1))
@@ -3123,7 +3130,7 @@ snapshots:
 
   '@fsarch/frontier-api@0.1.2(@nestjs/microservices@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(rxjs@7.8.2)(typescript@5.9.3)':
     dependencies:
-      '@fsarch/server': 0.5.3(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
+      '@fsarch/server': 0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
       '@nestjs/common': 12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/config': 12.0.1(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
       '@nestjs/core': 12.2.0(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@12.2.0)(@nestjs/platform-express@12.2.0)(@nestjs/websockets@12.2.0)(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -3189,7 +3196,7 @@ snapshots:
 
   '@fsarch/function-gateway@0.1.1(@nestjs/microservices@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(typescript@5.9.3)':
     dependencies:
-      '@fsarch/server': 0.5.3(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
+      '@fsarch/server': 0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
       '@nestjs/common': 12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/config': 12.0.1(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
       '@nestjs/core': 12.2.0(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@12.2.0)(@nestjs/platform-express@12.2.0)(@nestjs/websockets@12.2.0)(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -3244,7 +3251,7 @@ snapshots:
 
   '@fsarch/function-node-worker@0.1.1(@nestjs/microservices@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(rxjs@7.8.2)(typescript@5.9.3)':
     dependencies:
-      '@fsarch/server': 0.5.3(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
+      '@fsarch/server': 0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
       '@nestjs/common': 12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/core': 12.2.0(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@12.2.0)(@nestjs/platform-express@12.2.0)(@nestjs/websockets@12.2.0)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/event-emitter': 12.0.1(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.2.0)
@@ -3300,7 +3307,7 @@ snapshots:
 
   '@fsarch/function-server@0.1.2(@nestjs/microservices@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(keyv@5.6.0)(rxjs@7.8.2)(typescript@5.9.3)':
     dependencies:
-      '@fsarch/server': 0.5.3(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
+      '@fsarch/server': 0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
       '@nestjs/cache-manager': 12.0.1(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.2.0)(cache-manager@7.2.9)(keyv@5.6.0)(rxjs@7.8.2)
       '@nestjs/common': 12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/config': 12.0.1(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
@@ -3366,7 +3373,7 @@ snapshots:
 
   '@fsarch/image-editor-server@0.0.2(@nestjs/microservices@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(rxjs@7.8.2)(typescript@5.9.3)':
     dependencies:
-      '@fsarch/server': 0.5.3(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
+      '@fsarch/server': 0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
       '@napi-rs/canvas': 1.0.11
       '@nestjs/common': 12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/core': 12.2.0(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@12.2.0)(@nestjs/platform-express@12.2.0)(@nestjs/websockets@12.2.0)(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -3429,7 +3436,7 @@ snapshots:
   '@fsarch/image-server@0.2.2(@nestjs/microservices@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-validator@0.15.1)(rxjs@7.8.2)(typescript@5.9.3)':
     dependencies:
       '@aws-sdk/client-s3': 3.1153.0
-      '@fsarch/server': 0.5.3(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
+      '@fsarch/server': 0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
       '@nestjs/common': 12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/config': 12.0.1(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
       '@nestjs/core': 12.2.0(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@12.2.0)(@nestjs/platform-express@12.2.0)(@nestjs/websockets@12.2.0)(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -3489,9 +3496,68 @@ snapshots:
       - webpack
       - webpack-node-externals
 
+  '@fsarch/material-tracing-server@0.0.10(@nestjs/microservices@12.2.0)(@nestjs/platform-express@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(pg@8.23.1)(rxjs@7.8.2)(typescript@5.9.3)':
+    dependencies:
+      '@fsarch/server': 0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
+      '@nestjs/common': 12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/config': 12.0.1(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@nestjs/core': 12.2.0(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@12.2.0)(@nestjs/platform-express@12.2.0)(@nestjs/websockets@12.2.0)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/event-emitter': 12.0.1(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.2.0)
+      '@nestjs/swagger': 12.0.2(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.2.0)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(typescript@5.9.3)
+      '@nestjs/typeorm': 12.0.2(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.2.0)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typeorm@1.1.2(pg@8.23.1))
+      class-validator: 0.15.1
+      joi: 18.3.0
+      nanoid: 6.0.2
+      pino-pretty: 13.2.0
+      reflect-metadata: 0.2.2
+      typeorm: 1.1.2(better-sqlite3@13.0.3)(pg@8.23.1)
+      zod: 4.6.7
+    transitivePeerDependencies:
+      - '@fastify/static'
+      - '@google-cloud/spanner'
+      - '@nats-io/transport-node'
+      - '@nestjs/microservices'
+      - '@nestjs/platform-express'
+      - '@nestjs/platform-fastify'
+      - '@nestjs/websockets'
+      - '@rspack/core'
+      - '@sap/hana-client'
+      - '@swc/cli'
+      - '@swc/core'
+      - '@types/node'
+      - amqp-connection-manager
+      - amqplib
+      - babel-plugin-macros
+      - better-sqlite3
+      - cache-manager
+      - class-transformer
+      - fork-ts-checker-webpack-plugin
+      - ioredis
+      - kafkajs
+      - mongodb
+      - mqtt
+      - mssql
+      - mysql2
+      - oracledb
+      - pg
+      - pg-native
+      - pg-query-stream
+      - prettier
+      - redis
+      - rxjs
+      - sql.js
+      - supports-color
+      - ts-loader
+      - ts-node
+      - tsconfig-paths-webpack-plugin
+      - typeorm-aurora-data-api-driver
+      - typescript
+      - webpack
+      - webpack-node-externals
+
   '@fsarch/metric-server@0.1.1(@nestjs/microservices@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(keyv@5.6.0)(typescript@5.9.3)':
     dependencies:
-      '@fsarch/server': 0.5.3(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
+      '@fsarch/server': 0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
       '@nestjs/cache-manager': 12.0.1(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.2.0)(cache-manager@7.2.9)(keyv@5.6.0)(rxjs@7.8.2)
       '@nestjs/common': 12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nestjs/config': 12.0.1(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
@@ -3556,7 +3622,7 @@ snapshots:
       - webpack
       - webpack-node-externals
 
-  '@fsarch/server@0.5.3(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)':
+  '@fsarch/server@0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)':
     dependencies:
       '@grpc/grpc-js': 1.14.6
       '@modelcontextprotocol/core': 2.3.1
