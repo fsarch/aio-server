@@ -13,6 +13,13 @@
 # per section (oidc auth, postgres database, token-based uac, ...). This
 # file only shows the simplest working combination (sqlite + static
 # auth/uac) for a quick local smoke test.
+#
+# Every service is served on the main port (PORT, default 8080) under its
+# `/<id>` prefix (`/v1/<id>/...` for versioned routes). A service can also
+# get a `port` of its own, where it's reachable without the prefix, exactly
+# like the standalone service (`/v1/parts`, `/.ai/mcp`, swagger at `/`) -
+# still the same single app, the requests are just rewritten onto the mount.
+# Each port maps to exactly one service.
 services:
   - id: calendar
     type: calendar-server
@@ -216,6 +223,7 @@ services:
 
   - id: material-tracing
     type: material-tracing-server
+    port: 8081
     config:
       # Postgres only: the entities use `timestamp` columns and ILIKE queries.
       database:
@@ -241,5 +249,5 @@ services:
       custom_actions: []
       # `product_server` is optional and omitted here.
       #
-      # Custom resources: /v1/material-tracing/.meta/custom-resources
-      # MCP tools:        /material-tracing/.ai/mcp
+      # Main port (8080): /v1/material-tracing/..., /material-tracing/.ai/mcp
+      # Own port (8081):  /v1/..., /.ai/mcp

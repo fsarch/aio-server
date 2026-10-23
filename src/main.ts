@@ -1,7 +1,8 @@
 import "reflect-metadata";
 import { FsArchAppBuilder } from "@fsarch/server";
-import { Module } from "@nestjs/common";
-import { loadAioServerConfig } from "./config.js";
+import { Logger, Module } from "@nestjs/common";
+import { getMainPort, loadAioServerConfig } from "./config.js";
+import { listenForMount } from "./port-routing.js";
 import { SERVICE_TYPES } from "./service-registry.js";
 
 // No service-specific logic lives in this process's own root module - every
@@ -12,27 +13,45 @@ import { SERVICE_TYPES } from "./service-registry.js";
 class AppModule {}
 
 async function bootstrap() {
-  const config = loadAioServerConfig();
+	const config = loadAioServerConfig();
 
-  const builder = new FsArchAppBuilder(AppModule, {
-    name: "AIO-Server",
-    version: "1.0.0",
-  });
+	const builder = new FsArchAppBuilder(AppModule, {
+		name: "AIO-Server",
+		version: "1.0.0",
+	});
 
-  for (const service of config.services) {
-    const descriptor = SERVICE_TYPES[service.type];
-    if (!descriptor) {
-      throw new Error(
-        `Unknown service type "${service.type}" for service id "${service.id}". Known types: ${Object.keys(SERVICE_TYPES).join(", ")}`,
-      );
-    }
+	for (const service of config.services) {
+		const descriptor = SERVICE_TYPES[service.type];
+		if (!descriptor) {
+			throw new Error(
+				`Unknown service type "${service.type}" for service id "${service.id}". Known types: ${Object.keys(SERVICE_TYPES).join(", ")}`,
+			);
+		}
 
-    builder.addService({ id: service.id, ...descriptor });
-  }
+		builder.addService({ id: service.id, ...descriptor });
+	}
 
-  const app = await builder.build();
+	const app = await builder.build();
 
-  await app.listen(process.env.PORT ?? 8080);
+	await app.listen(getMainPort());
+
+	// Services with their own `port` are additionally reachable there without
+	// the `/<id>` prefix - same app, just rewritten onto the mount's routes.
+	const logger = new Logger("AioServer");
+	for (const service of config.services) {
+		if (service.port === undefined) {
+			continue;
+		}
+		await listenForMount({
+			port: service.port,
+			mountId: service.id,
+			handler: app.getHttpAdapter().getInstance(),
+			mainServer: app.getHttpServer(),
+		});
+		logger.log(
+			`service "${service.id}" also listening on port ${service.port}`,
+		);
+	}
 }
 
 bootstrap();
