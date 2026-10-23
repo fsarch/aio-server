@@ -1,6 +1,6 @@
 {
   "name": "aio-server",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "All-in-one mono-service harness mounting multiple fsarch services in a single process via @fsarch/server's FsArchAppBuilder.addService()",
   "author": "",
   "private": true,
