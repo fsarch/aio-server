@@ -302,3 +302,29 @@ services:
         users:
           - user_id: admin
             permissions: ["manage_printers", "manage_claims"]
+
+  - id: dblight
+    type: dblight-server
+    config:
+      # PostgreSQL 18+ only (ids use the native uuidv7()).
+      database:
+        type: postgres
+        host: localhost
+        port: 5432
+        database: dblight
+        username: dev
+        password: dev
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+      uac:
+        type: static
+        users:
+          - user_id: admin
+            permissions: ["db.read", "db.write", "db.admin"]
+      # `limits` is optional (see dblight-server's config.example.yaml).
+      # Main port: /dblight/collections, /dblight/health (unversioned routes)

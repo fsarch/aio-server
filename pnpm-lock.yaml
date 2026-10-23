@@ -11,6 +11,9 @@ importers:
       '@fsarch/calendar-server':
         specifier: ^0.0.1
         version: 0.0.1(@nestjs/core@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(rxjs@7.8.2)(typescript@5.9.3)
+      '@fsarch/dblight-server':
+        specifier: ^0.0.2
+        version: 0.0.2(@nestjs/microservices@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(rxjs@7.8.2)(typescript@5.9.3)
       '@fsarch/frontier-api':
         specifier: ^0.1.2
         version: 0.1.2(@nestjs/microservices@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(rxjs@7.8.2)(typescript@5.9.3)
@@ -265,6 +268,9 @@ packages:
   '@fsarch/calendar-server@0.0.1':
     resolution: {integrity: sha512-XZGVaKNIyciH4shrBZpP69cmoYFGv31uC4QZcvgq0lmHUmzUiho/P+VsOIRJ6W6ZfSaQWP/MmfOAZUYCboch4A==, tarball: https://npm.pkg.github.com/download/@fsarch/calendar-server/0.0.1/8ec0a5dc82580f36f07f99565da6359148d71b54}
     engines: {node: '>=24.0.0'}
+
+  '@fsarch/dblight-server@0.0.2':
+    resolution: {integrity: sha512-D4VZBey2KAJrMi3wZM+v7UsPlk/jHSyXeUobTK8UXzf23PB7takdpHjKJ1l9UPyenehNNZfmM9tsmwb0w0gb0g==, tarball: https://npm.pkg.github.com/download/@fsarch/dblight-server/0.0.2/06480303a1c7b61fee9155aebe21277137d77533}
 
   '@fsarch/frontier-api@0.1.2':
     resolution: {integrity: sha512-cl2FOeC1B9+e28zCa2WQ76fuq9YbkJPaa7I8UQjEhCaKPcuTZzuqEG7qGBy3svxofsaNnPxArAYmkih2SBm68Q==, tarball: https://npm.pkg.github.com/download/@fsarch/frontier-api/0.1.2/bc2bc9038e71cc18ff30af66cda28eb39be3aebe}
@@ -3099,6 +3105,61 @@ snapshots:
       - '@google-cloud/spanner'
       - '@nats-io/transport-node'
       - '@nestjs/core'
+      - '@nestjs/platform-fastify'
+      - '@nestjs/websockets'
+      - '@rspack/core'
+      - '@sap/hana-client'
+      - '@swc/cli'
+      - '@swc/core'
+      - '@types/node'
+      - amqp-connection-manager
+      - amqplib
+      - babel-plugin-macros
+      - better-sqlite3
+      - cache-manager
+      - fork-ts-checker-webpack-plugin
+      - ioredis
+      - kafkajs
+      - mongodb
+      - mqtt
+      - mssql
+      - mysql2
+      - oracledb
+      - pg-native
+      - pg-query-stream
+      - prettier
+      - redis
+      - rxjs
+      - sql.js
+      - supports-color
+      - ts-loader
+      - ts-node
+      - tsconfig-paths-webpack-plugin
+      - typeorm-aurora-data-api-driver
+      - typescript
+      - webpack
+      - webpack-node-externals
+
+  '@fsarch/dblight-server@0.0.2(@nestjs/microservices@12.2.0)(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(rxjs@7.8.2)(typescript@5.9.3)':
+    dependencies:
+      '@fsarch/server': 0.5.4(@nestjs/websockets@12.2.0)(@types/node@26.6.5)(cache-manager@7.2.9)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typescript@5.9.3)
+      '@nestjs/common': 12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/core': 12.2.0(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/microservices@12.2.0)(@nestjs/platform-express@12.2.0)(@nestjs/websockets@12.2.0)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/platform-express': 12.2.0(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.2.0)
+      '@nestjs/swagger': 12.0.3(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.2.0)(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(typescript@5.9.3)
+      '@nestjs/typeorm': 12.0.2(@nestjs/common@12.2.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.2.0)(reflect-metadata@0.2.2)(rxjs@7.8.2)(typeorm@1.1.2(pg@8.23.1))
+      ajv: 8.20.0
+      ajv-formats: 3.0.1(ajv@8.20.0)
+      class-transformer: 0.5.1
+      class-validator: 0.15.1
+      pg: 8.23.1
+      reflect-metadata: 0.2.2
+      typeorm: 1.1.2(better-sqlite3@13.0.3)(pg@8.23.1)
+    transitivePeerDependencies:
+      - '@fastify/static'
+      - '@google-cloud/spanner'
+      - '@nats-io/transport-node'
+      - '@nestjs/microservices'
       - '@nestjs/platform-fastify'
       - '@nestjs/websockets'
       - '@rspack/core'

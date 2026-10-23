@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@fsarch/calendar-server": "^0.0.1",
+    "@fsarch/dblight-server": "^0.0.2",
     "@fsarch/frontier-api": "^0.1.2",
     "@fsarch/function-gateway": "^0.1.1",
     "@fsarch/function-node-worker": "^0.1.1",

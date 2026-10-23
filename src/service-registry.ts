@@ -1,5 +1,6 @@
 import type { ServiceMountDescriptor } from "@fsarch/server";
 import { descriptor as calendarDescriptor } from "@fsarch/calendar-server";
+import { descriptor as dblightServerDescriptor } from "@fsarch/dblight-server";
 import { descriptor as metricDescriptor } from "@fsarch/metric-server";
 import { descriptor as functionGatewayDescriptor } from "@fsarch/function-gateway";
 import { descriptor as functionServerDescriptor } from "@fsarch/function-server";
@@ -32,4 +33,5 @@ export const SERVICE_TYPES: Record<string, MountableServiceDescriptor> = {
   "material-tracing-server": materialTracingServerDescriptor,
   "product-server": productServerDescriptor,
   "printer-server": printerServerDescriptor,
+  "dblight-server": dblightServerDescriptor,
 };

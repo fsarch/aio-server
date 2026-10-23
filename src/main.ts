@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { FsArchAppBuilder } from "@fsarch/server";
 import { Logger, Module } from "@nestjs/common";
+import type { NestExpressApplication } from "@nestjs/platform-express";
 import { getMainPort, loadAioServerConfig } from "./config.js";
 import { listenForMount } from "./port-routing.js";
 import { SERVICE_TYPES } from "./service-registry.js";
@@ -32,6 +33,12 @@ async function bootstrap() {
 	}
 
 	const app = await builder.build();
+
+	// The body parser is app-wide, so it has to fit the most demanding
+	// mounted service: dblight-server accepts record payloads of up to 2mb
+	// (Express' default is 100kb). Must run before `listen()`, which would
+	// otherwise register the default parser.
+	(app as NestExpressApplication).useBodyParser("json", { limit: "2mb" });
 
 	await app.listen(getMainPort());
 
