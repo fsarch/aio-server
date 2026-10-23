@@ -8,6 +8,8 @@ import { descriptor as imageEditorServerDescriptor } from "@fsarch/image-editor-
 import { descriptor as imageServerDescriptor } from "@fsarch/image-server";
 import { descriptor as frontierApiDescriptor } from "@fsarch/frontier-api";
 import { descriptor as materialTracingServerDescriptor } from "@fsarch/material-tracing-server";
+import { descriptor as printerServerDescriptor } from "@fsarch/printer-server";
+import { descriptor as productServerDescriptor } from "@fsarch/product-server";
 
 /** A mounted service's own descriptor, minus `id` - that's assigned per `services[]` entry in config, not fixed per type. */
 export type MountableServiceDescriptor = Omit<ServiceMountDescriptor, "id">;
@@ -28,4 +30,6 @@ export const SERVICE_TYPES: Record<string, MountableServiceDescriptor> = {
   "image-server": imageServerDescriptor,
   "frontier-api": frontierApiDescriptor,
   "material-tracing-server": materialTracingServerDescriptor,
+  "product-server": productServerDescriptor,
+  "printer-server": printerServerDescriptor,
 };

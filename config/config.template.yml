@@ -251,3 +251,54 @@ services:
       #
       # Main port (8080): /v1/material-tracing/..., /material-tracing/.ai/mcp
       # Own port (8081):  /v1/..., /.ai/mcp
+
+  - id: product
+    type: product-server
+    config:
+      # Postgres/CockroachDB only, like material-tracing above.
+      database:
+        type: postgres
+        host: localhost
+        port: 5432
+        database: product_server
+        username: dev
+        password: dev
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+      uac:
+        type: static
+        users:
+          # product-server's Role enum has no wildcard - list its roles explicitly.
+          - user_id: admin
+            permissions: ["read_catalog", "read_item_type", "read_attribute", "read_item"]
+      # Main port: /v1/product/catalogs, /product/.ai/mcp,
+      # /v1/product/.meta/custom-resources
+
+  - id: printer
+    type: printer-server
+    config:
+      # Postgres/CockroachDB only.
+      database:
+        type: postgres
+        host: localhost
+        port: 5432
+        database: printer_server
+        username: dev
+        password: dev
+      auth:
+        type: static
+        secret: dev-secret-change-me
+        users:
+          - id: admin
+            username: admin
+            password: admin
+      uac:
+        type: static
+        users:
+          - user_id: admin
+            permissions: ["manage_printers", "manage_claims"]
