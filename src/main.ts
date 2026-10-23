@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { FsArchAppBuilder } from "@fsarch/server";
 import { Logger, Module } from "@nestjs/common";
 import type { NestExpressApplication } from "@nestjs/platform-express";
+import { WsAdapter } from "@nestjs/platform-ws";
 import { getMainPort, loadAioServerConfig } from "./config.js";
 import { listenForMount } from "./port-routing.js";
 import { SERVICE_TYPES } from "./service-registry.js";
@@ -39,6 +40,14 @@ async function bootstrap() {
 	// (Express' default is 100kb). Must run before `listen()`, which would
 	// otherwise register the default parser.
 	(app as NestExpressApplication).useBodyParser("json", { limit: "2mb" });
+
+	// Mounted services' `@WebSocketGateway({ path })`s (frontier-api's worker
+	// control plane) share the main HTTP server, each under its mount prefix
+	// (`/<id>/api/workers/websocket`, see `@fsarch/server`'s
+	// `prefixGatewayProvider()`); upgrades on a mount's own port are rewritten
+	// onto that same path by `listenForMount()`. Like the body parser, this
+	// has to be set before `listen()` initializes the gateways.
+	app.useWebSocketAdapter(new WsAdapter(app));
 
 	await app.listen(getMainPort());
 

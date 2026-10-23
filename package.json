@@ -35,8 +35,10 @@
     "@nestjs/common": "^12.1.0",
     "@nestjs/core": "^12.1.0",
     "@nestjs/platform-express": "^12.1.0",
+    "@nestjs/platform-ws": "^12.2.0",
     "js-yaml": "^5.4.2",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "ws": "^8.22.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",

@@ -216,6 +216,9 @@ services:
             username: admin
             password: admin
       # Required by FrontierApiModule's ModuleConfiguration.register('WORKERS_CONFIG', ...).
+      # Workers connect to /frontier-api/api/workers/websocket - point them at
+      # FRONTIER_API_URL=http://<aio-host>/frontier-api (or, with a `port:` on
+      # this entry, http://<aio-host>:<port>).
       workers:
         websocket:
           auth_token: dev-worker-auth-token
